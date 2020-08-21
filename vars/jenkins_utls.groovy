@@ -12,11 +12,11 @@ def helmInstall (namespace, release) {
 
     script {
         release = "${release}-${namespace}"
-        sh "helm repo add helm ${HELM_REPO}; helm repo update"
+        sh "helm repo add helm ${env.HELM_REPO}; helm repo update"
         sh """
             helm upgrade --install --namespace ${namespace} ${release} \
-                --set imagePullSecrets=${IMG_PULL_SECRET} \
-                --set image.repository=${DOCKER_REG}/${IMAGE_NAME},image.tag=${DOCKER_TAG} helm/acme
+                --set imagePullSecrets=${env.IMG_PULL_SECRET} \
+                --set image.repository=${env.DOCKER_REG}/${env.IMAGE_NAME},image.tag=${env.DOCKER_TAG} helm/acme
         """
         sh "sleep 5"
     }
