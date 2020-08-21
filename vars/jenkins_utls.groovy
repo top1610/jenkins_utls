@@ -7,16 +7,16 @@ def createNamespace (namespace) {
 /*
     Helm install
  */
-def helmInstall (namespace, release) {
+def helmInstall (namespace, release, HELM_REPO, IMG_PULL_SECRET, DOCKER_REG, IMAGE_NAME, DOCKER_TAG) {
     echo "Installing ${release} in ${namespace}"
 
     script {
         release = "${release}-${namespace}"
-        sh "helm repo add helm ${env.HELM_REPO}; helm repo update"
+        sh "helm repo add helm ${HELM_REPO}; helm repo update"
         sh """
             helm upgrade --install --namespace ${namespace} ${release} \
-                --set imagePullSecrets=${env.IMG_PULL_SECRET} \
-                --set image.repository=${env.DOCKER_REG}/${env.IMAGE_NAME},image.tag=${env.DOCKER_TAG} helm/acme
+                --set imagePullSecrets=${IMG_PULL_SECRET} \
+                --set image.repository=${DOCKER_REG}/${IMAGE_NAME},image.tag=${DOCKER_TAG} helm/acme
         """
         sh "sleep 5"
     }
