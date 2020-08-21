@@ -56,7 +56,7 @@ def curlRun (url, out) {
 /*
     Test with a simple curl and check we get 200 back
  */
-def curlTest (namespace, out) {
+def curlTest (namespace, out, ID) {
     echo "Running tests in ${namespace}"
 
     script {
