@@ -9,26 +9,7 @@ def call(String gitUrl, String helmConfig, String appType, String projectName, S
         stages {
             stage('Prepare') {   
                 steps {
-                    checkout([
-                                $class: 'GitSCM', 
-                                branches: [[name: '*/test-cicd']], 
-                                doGenerateSubmoduleConfigurations: false, 
-                                extensions: [[
-                                    $class: 'SubmoduleOption', 
-                                    disableSubmodules: false, 
-                                    parentCredentials: true, 
-                                    recursiveSubmodules: true,
-                                    reference: '', 
-                                    trackingSubmodules: false
-                                ]], 
-                                submoduleCfg: [], 
-                                userRemoteConfigs: [[
-                                    credentialsId: 'hieupham-cooky-git', 
-                                    url: '${gitUrl}'
-                                ]
-                                ]
-                            ]
-                            )
+                    
                     
                     sh "cp ${WORKSPACE}/${configDir}/${REGION}/config_${ENV}_env.py ${WORKSPACE}/${libDir}/config.py"
                     sh "cp ${WORKSPACE}/deploy_config/Dockerfile ${WORKSPACE}/Dockerfile"
