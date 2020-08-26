@@ -13,9 +13,9 @@ def call(String gitUrl, String helmConfig, String appType, String projectName, S
                     sh "echo $PROJECT_ENV"
                     sh "cp ${WORKSPACE}/${configDir}/${REGION}/config_${ENV}_env.py ${WORKSPACE}/${libDir}/config.py"
                     sh "cp ${WORKSPACE}/deploy_config/Dockerfile ${WORKSPACE}/Dockerfile"
-                    sh "sed -i "s+\[HOST_PORT\]+${HOST_PORT}+g" $ZIP_PROJECT/common/deploy/*"
-                    sh "sed -i "s+\[NUM_WORKERS\]+${NUM_WORKERS}+g" $ZIP_PROJECT/common/deploy/*"
-                    sh "sed -i "s+\[DOCKER_SERVICE\]+${DOCKER_SERVICE}+g" $ZIP_PROJECT/common/deploy/*"
+                    sh "sed -i "s+\\[HOST_PORT\\]+${HOST_PORT}+g" $ZIP_PROJECT/common/deploy/*"
+                    sh "sed -i "s+\\[NUM_WORKERS\\]+${NUM_WORKERS}+g" $ZIP_PROJECT/common/deploy/*"
+                    sh "sed -i "s+\\[DOCKER_SERVICE\\]+${DOCKER_SERVICE}+g" $ZIP_PROJECT/common/deploy/*"
                     script {
                         def appimage = docker.build (dockerImage + ":$BUILD_NUMBER", "--network=host .")
                         docker.withRegistry( 'https://registry.cooky.vn', 'hieupham-cooky-git' ) {
