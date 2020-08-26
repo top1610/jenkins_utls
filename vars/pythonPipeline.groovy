@@ -28,10 +28,9 @@ def call(String gitUrl, String helmConfig, String appType, String projectName, S
                 steps {
                     script{
                         def image_id = dockerImage
-                        sh "cd deploy_config/helm_deploy/"
-                        sh "ls"
-                        sh "pwd"
-                        sh "helm install ${projectName} ./${projectName} --set image.repository=${image_id} --set image.tag=$BUILD_NUMBER"
+                        dir('deploy_config/helm_deploy'){
+                            sh "helm install ${projectName} ./${projectName} --set image.repository=${image_id} --set image.tag=$BUILD_NUMBER"
+                        }
                     }
                 }
             }
