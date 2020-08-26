@@ -10,7 +10,11 @@ def call(String gitUrl, String helmConfig, String appType, String projectName, S
             stage('Prepare') {   
                 steps {
                     
-                    sh 'echo $PROJECT_ENV'
+                    sh 'echo 1: $PROJECT_ENV'
+                    sh 'echo 2: $REGION'
+                    sh "echo 3: ${env.PROJECT_ENV}"
+                    sh "echo 4: ${env.REGION}"
+
                     sh "cp ${WORKSPACE}/${configDir}/${REGION}/config_${ENV}_env.py ${WORKSPACE}/${libDir}/config.py"
                     sh "cp ${WORKSPACE}/deploy_config/Dockerfile ${WORKSPACE}/Dockerfile"
                     //sh "sed -i "s+\\[HOST_PORT\\]+${HOST_PORT}+g" $ZIP_PROJECT/common/deploy/*"
