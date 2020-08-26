@@ -16,7 +16,7 @@ def call(String gitUrl, String helmConfig, String appType, String projectName, S
                     
                     script {
                     def appimage = docker.build (dockerImage + ":$BUILD_NUMBER", "--network=host .")
-                    docker.withRegistry( 'https://registry.cooky.vn', registryCredential ) {
+                    docker.withRegistry( 'https://registry.cooky.vn', 'hieupham-cooky-git' ) {
                         appimage.push()
                         appimage.push('latest')
                     }
