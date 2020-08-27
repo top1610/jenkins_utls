@@ -25,8 +25,11 @@ def call(String gitUrl, String helmConfig, String appType, String projectName, S
                         ]
                       ]
                     )
-                   load "${WORKSPACE}/deploy_config/${ENV}_env/${moduleDir}/env.groovy"
-                   echo "${HOST_PORT}"
+                    load "${JENKINS_HOME}/parameters.groovy"
+                    echo "DOCKER_REG is ${DOCKER_REG}"
+                    echo "HELM_REPO  is ${HELM_REPO}"
+                    load "${WORKSPACE}/deploy_config/${ENV}_env/${moduleDir}/env.groovy"
+                    echo "${HOST_PORT}"
                         
                     
                     sh 'env'
