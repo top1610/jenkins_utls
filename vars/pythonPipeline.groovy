@@ -29,7 +29,7 @@ def call(String gitUrl, String helmConfig, String appType, String projectName, S
                         if (fileExists("${WORKSPACE}/deploy_config/${ENV}_env/${moduleDir}/.env"))
                         {
                            load "${WORKSPACE}/deploy_config/${ENV}_env/${moduleDir}/.env"
-                            echo ${HOST_PORT}
+                           echo "${HOST_PORT}"
                         }
                     }
                     
