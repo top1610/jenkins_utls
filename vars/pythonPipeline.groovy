@@ -30,7 +30,7 @@ def call(String gitUrl, String helmConfig, String appType, String projectName, S
                             then export \$(cat ${WORKSPACE}/deploy_config/${ENV}_env/.env | sed 's/#.*//g' | xargs) 
                         fi 
                     """
-                    
+                    sh "export \$(cat ${WORKSPACE}/deploy_config/${ENV}_env/.env | sed 's/#.*//g' | xargs)"
                     sh "cp ${WORKSPACE}/${configDir}/${REGION}/config_${ENV}_env.py ${WORKSPACE}/${libDir}/config.py"
                     sh "cp ${WORKSPACE}/deploy_config/Dockerfile ${WORKSPACE}/Dockerfile"
                     sh "sed -i \"s+\\[HOST_PORT\\]+${HOST_PORT}+g\" common/deploy/*"
