@@ -26,11 +26,10 @@ def call(String gitUrl, String helmConfig, String appType, String projectName, S
                       ]
                     )
                     script{
-                        if (fileExists("${WORKSPACE}/deploy_config/${ENV}_env/${moduleDir}/env.groovy"))
-                        {
+                        
                            load "${WORKSPACE}/deploy_config/${ENV}_env/${moduleDir}/env.groovy"
                            echo "${HOST_PORT}"
-                        }
+                        
                     }
                     
                     sh 'env'
