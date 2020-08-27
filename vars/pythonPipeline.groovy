@@ -26,7 +26,7 @@ def call(String gitUrl, String helmConfig, String appType, String projectName, S
                       ]
                     )
                     
-                    sh "if [ -f deploy_config/${ENV}_env/.env ] then export $$(cat deploy_config/${ENV}_env/.env | sed 's/#.*//g' | xargs) fi "
+                    sh "if [ -f deploy_config/$${ENV}_env/.env ] then export $$(cat deploy_config/$${ENV}_env/.env | sed 's/#.*//g' | xargs) fi "
                     
                     sh "cp ${WORKSPACE}/${configDir}/${REGION}/config_${ENV}_env.py ${WORKSPACE}/${libDir}/config.py"
                     sh "cp ${WORKSPACE}/deploy_config/Dockerfile ${WORKSPACE}/Dockerfile"
