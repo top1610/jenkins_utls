@@ -14,7 +14,26 @@ def call(String gitUrl, String helmConfig, String appType, String projectName, S
                     sh 'echo 2: $REGION'
                     sh "echo 3: ${env.PROJECT_ENV}"
                     sh "echo 4: ${env.REGION}"
-
+                    checkout([
+                        $class: 'GitSCM', 
+                        branches: [[name: '*/release']], 
+                        doGenerateSubmoduleConfigurations: false, 
+                        extensions: [[
+                            $class: 'SubmoduleOption', 
+                            disableSubmodules: false, 
+                            parentCredentials: true, 
+                            recursiveSubmodules: true,
+                            reference: '', 
+                            trackingSubmodules: false
+                          ]], 
+                        submoduleCfg: [], 
+                        userRemoteConfigs: [[
+                            credentialsId: 'hieupham-cooky-git', 
+                            url: '${gitUrl}'
+                          ]
+                        ]
+                      ]
+                    )
                     sh "cp ${WORKSPACE}/${configDir}/${REGION}/config_${ENV}_env.py ${WORKSPACE}/${libDir}/config.py"
                     sh "cp ${WORKSPACE}/deploy_config/Dockerfile ${WORKSPACE}/Dockerfile"
                     //sh "sed -i "s+\\[HOST_PORT\\]+${HOST_PORT}+g" $ZIP_PROJECT/common/deploy/*"
