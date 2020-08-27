@@ -1,8 +1,9 @@
 def call(String gitUrl, String helmConfig, String appType, String projectName, String configDir, String moduleDir, String libDir, String testCommand, String dockerImage)
 {
-    load "${WORKSPACE}/deploy_config/${ENV}_env/${moduleDir}/env.groovy"
     pipeline {
         agent any  
+            load "${WORKSPACE}/deploy_config/${ENV}_env/${moduleDir}/env.groovy"
+
         stages {
             stage('Prepare') {   
                 steps {                    
