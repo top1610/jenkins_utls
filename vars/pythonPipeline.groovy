@@ -29,7 +29,7 @@ def call(String gitUrl, String helmConfig, String appType, String projectName, S
                         submoduleCfg: [], 
                         userRemoteConfigs: [[
                             credentialsId: 'hieupham-cooky-git', 
-                            url: '${gitUrl}'
+                            url: "${gitUrl}"
                           ]
                         ]
                       ]
