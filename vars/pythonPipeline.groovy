@@ -25,9 +25,10 @@ def call(String gitUrl, String helmConfig, String appType, String projectName, S
                         ]
                       ]
                     )
-                    
+                    script{
                     test_var = load "${WORKSPACE}/deploy_config/${ENV}_env/${moduleDir}/env.groovy"
                     echo "${test_var}"
+                    }
                         
                     
                     sh 'env'
