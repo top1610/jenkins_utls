@@ -1,5 +1,6 @@
 def call(String gitUrl, String helmConfig, String appType, String projectName, String configDir, String moduleDir, String libDir, String testCommand, String dockerImage)
 {
+    load "${WORKSPACE}/deploy_config/${ENV}_env/${moduleDir}/env.groovy"
     pipeline {
         agent any  
         stages {
@@ -25,10 +26,7 @@ def call(String gitUrl, String helmConfig, String appType, String projectName, S
                         ]
                       ]
                     )
-                    script{
-                    test_var = load "${WORKSPACE}/deploy_config/${ENV}_env/${moduleDir}/env.groovy"
-                    echo "${test_var.HOST_PORT}"
-                    }
+                    
                         
                     
                     sh 'env'
