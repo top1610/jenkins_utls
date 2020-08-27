@@ -1,11 +1,7 @@
 def call(String gitUrl, String helmConfig, String appType, String projectName, String configDir, String moduleDir, String libDir, String testCommand, String dockerImage)
 {
     pipeline {
-    agent any
-    environment {
-        REGION = "vn"
-        ENV = 'test'
-    }
+        agent any  
         stages {
             stage('Prepare') {   
                 steps {
@@ -16,7 +12,7 @@ def call(String gitUrl, String helmConfig, String appType, String projectName, S
                     sh "echo 4: ${env.REGION}"
                     checkout([
                         $class: 'GitSCM', 
-                        branches: [[name: '*/release']], 
+                        branches: [[name: '*/test-cicd']], 
                         doGenerateSubmoduleConfigurations: false, 
                         extensions: [[
                             $class: 'SubmoduleOption', 
