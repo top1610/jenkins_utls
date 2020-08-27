@@ -26,7 +26,7 @@ def call(String gitUrl, String helmConfig, String appType, String projectName, S
                       ]
                     )
                     sh """
-                        if [ -f ${WORKSPACE}/deploy_config/${moduleDir}/${ENV}_env/${moduleDir}/.env ] 
+                        if [ -f ${WORKSPACE}/deploy_config/${ENV}_env/${moduleDir}/.env ] 
                             then export \$(cat ${WORKSPACE}/deploy_config/${ENV}_env/${moduleDir}/.env | sed 's/#.*//g' | xargs) 
                         fi 
                     """
