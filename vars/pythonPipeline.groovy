@@ -28,7 +28,7 @@ def call(String gitUrl, String helmConfig, String appType, String projectName, S
                     def evnPath = "deploy_config/${ENV}_env/.env"
                     sh """
                         if [ -f ${evnPath} ] 
-                            then export $$(cat ${evnPath} | sed 's/#.*//g' | xargs) 
+                            then export \$(cat ${evnPath} | sed 's/#.*//g' | xargs) 
                         fi 
                     """
                     
