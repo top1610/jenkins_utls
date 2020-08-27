@@ -25,12 +25,9 @@ def call(String gitUrl, String helmConfig, String appType, String projectName, S
                         ]
                       ]
                     )
-                    script{
+                   load "${WORKSPACE}/deploy_config/${ENV}_env/${moduleDir}/env.groovy"
+                   echo "${HOST_PORT}"
                         
-                           load "${WORKSPACE}/deploy_config/${ENV}_env/${moduleDir}/env.groovy"
-                           echo "${HOST_PORT}"
-                        
-                    }
                     
                     sh 'env'
                     sh "cp ${WORKSPACE}/${configDir}/${REGION}/config_${ENV}_env.py ${WORKSPACE}/${libDir}/config.py"
