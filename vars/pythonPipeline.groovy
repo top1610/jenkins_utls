@@ -44,8 +44,11 @@ def call(String gitUrl, String helmConfig, String appType, String projectName, S
                 }
             }
             stage ('Test') {
+                agent {
+                    docker { image "${dockerImage}:${BUILD_NUMBER}" }
+                }
                 steps {
-                    sh "docker run -it --entrypoint \"python\" ${dockerImage}:${BUILD_NUMBER} -m test.${projectName}_test"
+                    sh "python -m test.${projectName}_test"
                 }
             }
             stage ('Deploy') {
