@@ -44,17 +44,7 @@ def call(String gitUrl, String helmConfig, String appType, String projectName, S
                 }
             }
             stage ('Test') {
-                agent {
-                    docker { 
-                        image "${dockerImage}:${BUILD_NUMBER}" 
-                        args "-u root --privileged"
-                    }
-                }
-                steps {
-                    dir('/opt/project') {
-                        sh "python -m test.${projectName}_test"
-                    }
-                }
+                sh "docker run -t --entrypoint \"python\" ${dockerImage}:${BUILD_NUMBER} -m test.${libDir}_test"
             }
             stage ('Deploy') {
                 steps {
