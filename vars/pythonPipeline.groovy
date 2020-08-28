@@ -48,7 +48,9 @@ def call(String gitUrl, String helmConfig, String appType, String projectName, S
                     docker { image "${dockerImage}:${BUILD_NUMBER}" }
                 }
                 steps {
-                    sh "python -m test.${projectName}_test"
+                    dir('/opt/project') {
+                        sh "python -m test.${projectName}_test"
+                    }
                 }
             }
             stage ('Deploy') {
