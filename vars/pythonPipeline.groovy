@@ -44,7 +44,9 @@ def call(String gitUrl, String helmConfig, String appType, String projectName, S
                 }
             }
             stage ('Test') {
-                sh "docker run -t --entrypoint \"python\" ${dockerImage}:${BUILD_NUMBER} -m test.${libDir}_test"
+                step {
+                    sh "docker run -t --entrypoint \"python\" ${dockerImage}:${BUILD_NUMBER} -m test.${libDir}_test"
+                }
             }
             stage ('Deploy') {
                 steps {
