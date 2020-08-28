@@ -47,7 +47,7 @@ def call(String gitUrl, String helmConfig, String appType, String projectName, S
                 agent {
                     docker { 
                         image "${dockerImage}:${BUILD_NUMBER}" 
-                        args "-u root:root"
+                        args "-u root --privileged"
                     }
                 }
                 steps {
