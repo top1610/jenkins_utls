@@ -30,7 +30,7 @@ def call(String gitUrl, String helmConfig, String appType, String projectName, S
                     
                     sh "cp ${WORKSPACE}/${configDir}/${REGION}/config_${ENV}_env.py ${WORKSPACE}/${libDir}/config.py"
                     sh "cp ${WORKSPACE}/deploy_config/Dockerfile ${WORKSPACE}/Dockerfile"
-                    sh "cp ${WORKSPACE}/common/gunicorn_config.py ${WORKSPACE}/gunicorn_config.py"
+                    //sh "cp ${WORKSPACE}/common/gunicorn_config.py ${WORKSPACE}/gunicorn_config.py"
                     //sh "sed -i \"s+\\[HOST_PORT\\]+${HOST_PORT}+g\" common/deploy/*"
                     //sh "sed -i \"s+\\[NUM_WORKERS\\]+${NUM_WORKERS}+g\" common/deploy/*"
                     script {
