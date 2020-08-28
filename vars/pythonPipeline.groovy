@@ -45,7 +45,10 @@ def call(String gitUrl, String helmConfig, String appType, String projectName, S
             }
             stage ('Test') {
                 agent {
-                    docker { image "${dockerImage}:${BUILD_NUMBER}" }
+                    docker { 
+                        image "${dockerImage}:${BUILD_NUMBER}" 
+                        args "-u root:root"
+                    }
                 }
                 steps {
                     dir('/opt/project') {
