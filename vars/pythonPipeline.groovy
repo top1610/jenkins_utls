@@ -28,11 +28,11 @@ def call(String gitUrl, String helmConfig, String appType, String projectName, S
                     
                         
                     
-                    sh 'env'
                     sh "cp ${WORKSPACE}/${configDir}/${REGION}/config_${ENV}_env.py ${WORKSPACE}/${libDir}/config.py"
                     sh "cp ${WORKSPACE}/deploy_config/Dockerfile ${WORKSPACE}/Dockerfile"
-                    sh "sed -i \"s+\\[HOST_PORT\\]+${HOST_PORT}+g\" common/deploy/*"
-                    sh "sed -i \"s+\\[NUM_WORKERS\\]+${NUM_WORKERS}+g\" common/deploy/*"
+                    sh "cp ${WORKSPACE}/common/gunicorn_config.py ${WORKSPACE}/gunicorn_config.py"
+                    //sh "sed -i \"s+\\[HOST_PORT\\]+${HOST_PORT}+g\" common/deploy/*"
+                    //sh "sed -i \"s+\\[NUM_WORKERS\\]+${NUM_WORKERS}+g\" common/deploy/*"
                     script {
                         def appimage = docker.build (dockerImage + ":$BUILD_NUMBER", "--network=host .")
                         docker.withRegistry( 'https://registry.cooky.vn', 'hieupham-cooky-git' ) {
@@ -41,6 +41,11 @@ def call(String gitUrl, String helmConfig, String appType, String projectName, S
                         }
                     }
             
+                }
+            }
+            stage ('Test') {
+                steps {
+                    sh "docker run -it --entrypoint \"python\" ${dockerImage}:${BUILD_NUMBER} -m test.${projectName}_test"
                 }
             }
             stage ('Deploy') {
